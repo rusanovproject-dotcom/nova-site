@@ -4,6 +4,7 @@ import {
   Overture,
   Cases,
   SeriesIntro,
+  BotanicalReel,
   Gallery,
   ColorDirection,
   Manifesto,
@@ -23,6 +24,7 @@ export default function Home() {
       <Overture />
       <Cases />
       <SeriesIntro />
+      <BotanicalReel />
       <Gallery />
       <ColorDirection />
       <Manifesto />

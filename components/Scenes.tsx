@@ -186,6 +186,48 @@ export function SeriesIntro() {
   );
 }
 
+/* ============ BOTANICAL MYTH — живой кадр (видео-центр серии) ============ */
+export function BotanicalReel() {
+  return (
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-coal px-6 py-20 grain">
+      {/* мягкое золотое свечение за кадром */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[80%] w-[70%] -translate-x-1/2 -translate-y-1/2"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,162,75,0.14), transparent 72%)",
+        }}
+      />
+      <Reveal className="relative z-10">
+        <div className="relative mx-auto w-[min(78vw,420px)]">
+          <div className="relative overflow-hidden rounded-[2px] grade">
+            <CinemaVideo
+              mp4="/video/botanical-peonies.mp4"
+              webm="/video/botanical-peonies.webm"
+              poster="/poster/botanical-peonies.jpg"
+              ratio="aspect-[1080/1446]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-coal/55 via-transparent to-coal/15" />
+            <BorderBeam size={70} duration={9} borderWidth={1} />
+          </div>
+          {/* золотые уголки видоискателя */}
+          <span className="pointer-events-none absolute -top-3 -left-3 h-7 w-7 border-t border-l border-gold/45" />
+          <span className="pointer-events-none absolute -top-3 -right-3 h-7 w-7 border-t border-r border-gold/45" />
+          <span className="pointer-events-none absolute -bottom-3 -left-3 h-7 w-7 border-b border-l border-gold/45" />
+          <span className="pointer-events-none absolute -bottom-3 -right-3 h-7 w-7 border-b border-r border-gold/45" />
+        </div>
+        <p className="mx-auto mt-8 max-w-md text-center text-sm leading-relaxed text-offwhite/55">
+          Образ оживает — не кадр, а сцена. Каждый проект серии можно превратить
+          в движущийся портрет бренда.
+        </p>
+        <MonoLabel className="mt-4 block text-center !text-gold !text-[0.6rem]">
+          BOTANICAL MYTH · MOTION
+        </MonoLabel>
+      </Reveal>
+    </section>
+  );
+}
+
 /* ============ СЦЕНА 07 — ГАЛЕРЕЯ-ЯКОРЬ (sticky stack) ============ */
 function GalleryFrame({
   item,
