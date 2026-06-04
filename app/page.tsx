@@ -3,7 +3,6 @@ import TimecodeHUD from "@/components/TimecodeHUD";
 import {
   Overture,
   Cases,
-  SeriesIntro,
   BotanicalReel,
   Gallery,
   ColorDirection,
@@ -22,17 +21,19 @@ export default function Home() {
       <TimecodeHUD />
       <Hero />
       <Overture />
+      {/* Четыре концепт-проекта — демонстрация возможностей */}
       <Cases />
-      <SeriesIntro />
-      <BotanicalReel />
-      <Gallery />
       <ColorDirection />
+      {/* Смысловой блок + автор */}
       <Manifesto />
       <About />
       <Process />
       <ForWhom />
       <Offer />
       <FinalCta />
+      {/* Закрытие — образы, которых не существовало */}
+      <BotanicalReel />
+      <Gallery />
       <Footer />
     </main>
   );

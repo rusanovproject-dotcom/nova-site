@@ -217,11 +217,11 @@ export function BotanicalReel() {
           <span className="pointer-events-none absolute -bottom-3 -right-3 h-7 w-7 border-b border-r border-gold/45" />
         </div>
         <p className="mx-auto mt-8 max-w-md text-center text-sm leading-relaxed text-offwhite/55">
-          Образ оживает — не кадр, а сцена. Каждый проект серии можно превратить
+          Образ оживает — не кадр, а сцена. Любой образ можно превратить
           в движущийся портрет бренда.
         </p>
         <MonoLabel className="mt-4 block text-center !text-gold !text-[0.6rem]">
-          BOTANICAL MYTH · MOTION
+          ЖИВОЙ КАДР · ВИДЕО
         </MonoLabel>
       </Reveal>
     </section>
@@ -317,7 +317,7 @@ export function ColorDirection() {
       <div className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(181,88,46,0.12),transparent_60%)]" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-16">
         <Reveal className="max-w-md">
-          <MonoLabel className="!text-gold">РЕЖИССУРА ЦВЕТА</MonoLabel>
+          <MonoLabel className="!text-gold">{colorDirection.label}</MonoLabel>
           <h2 className="mt-5 font-display text-4xl leading-tight text-offwhite md:text-5xl">
             {colorDirection.title}
           </h2>
@@ -346,7 +346,7 @@ export function ColorDirection() {
 
       {/* Контактный лист — film strip (приём Magic UI Marquee) */}
       <div className="relative mt-20 overflow-hidden">
-        <MonoLabel className="mb-5 block !text-[0.6rem]">КОНТАКТНЫЙ ЛИСТ · СЕРИЯ</MonoLabel>
+        <MonoLabel className="mb-5 block !text-[0.6rem]">ДО / ПОСЛЕ · КАДРЫ В ОБРАБОТКЕ</MonoLabel>
         <div className="flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {colorDirection.filmStrip.map((src) => (
             <div
@@ -355,7 +355,7 @@ export function ColorDirection() {
             >
               <Image
                 src={img(src)}
-                alt="Кадр серии BOTANICAL MYTH"
+                alt="Обработка кадра — NOVA"
                 fill
                 sizes="200px"
                 className="object-cover transition-transform duration-700 hover:scale-110"
@@ -434,36 +434,14 @@ export function About() {
       <div className="relative min-h-[60svh] overflow-hidden md:min-h-full">
         <motion.div style={{ y }} className="absolute inset-[-8%] grade">
           <Image
-            src={img("about")}
-            alt="Анастасия Нехаева за работой"
+            src={img("hero")}
+            alt="Анастасия Нехаева — портрет"
             fill
             sizes="(max-width:768px) 100vw, 50vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-coal-warm/40 to-transparent" />
-
-        {/* Альт-портрет автора (hero.png) — "контрольный кадр" режиссёра, кинолента */}
-        <Reveal
-          delay={0.25}
-          className="absolute bottom-6 left-6 z-10 w-32 md:bottom-9 md:left-9 md:w-40"
-        >
-          <div className="relative overflow-hidden rounded-sm border border-gold/25 shadow-2xl shadow-black/60 grade">
-            <div className="relative aspect-[3/4]">
-              <Image
-                src={img("hero")}
-                alt="Анастасия Нехаева — портрет"
-                fill
-                sizes="160px"
-                className="object-cover"
-              />
-            </div>
-            <span className="mono-label absolute bottom-1.5 left-2 !text-[0.46rem] !text-offwhite/80">
-              DIR. A.NEHAEVA
-            </span>
-            <BorderBeam size={50} duration={7} borderWidth={1} />
-          </div>
-        </Reveal>
+        <div className="absolute inset-0 bg-gradient-to-t from-coal-warm/50 via-transparent to-transparent" />
       </div>
     </section>
   );
