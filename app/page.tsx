@@ -1,15 +1,15 @@
 import Hero from "@/components/Hero";
 import TimecodeHUD from "@/components/TimecodeHUD";
 import {
-  Overture,
+  PainOverture,
+  BlindTest,
+  ProductStaysYours,
+  FullCycle,
   Cases,
-  Gallery,
-  ColorDirection,
-  Manifesto,
-  About,
   Process,
-  ForWhom,
+  Safety,
   Offer,
+  About,
   FinalCta,
   Footer,
 } from "@/components/Scenes";
@@ -19,19 +19,26 @@ export default function Home() {
     <main className="relative bg-coal">
       <TimecodeHUD />
       <Hero />
-      <Overture />
-      {/* Четыре концепт-проекта — демонстрация возможностей */}
+      {/* Нерв — знакомая боль */}
+      <PainOverture />
+      {/* Главное доказательство — слепой тест */}
+      <BlindTest />
+      {/* Возражение «исказит мой продукт» */}
+      <ProductStaysYours />
+      {/* Категорийный сдвиг — режиссёр, не нейро-оператор */}
+      <FullCycle />
+      {/* Кейсы по нишам */}
       <Cases />
-      <ColorDirection />
-      {/* Смысловой блок + автор */}
-      <Manifesto />
-      <About />
+      {/* Прозрачный процесс */}
       <Process />
-      <ForWhom />
+      {/* Юр-рамки */}
+      <Safety />
+      {/* Тарифы + экономика */}
       <Offer />
+      {/* Лицо и почерк */}
+      <About />
+      {/* Финальный трипвайр 5К */}
       <FinalCta />
-      {/* Закрытие — образы, которых не существовало */}
-      <Gallery />
       <Footer />
     </main>
   );

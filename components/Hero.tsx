@@ -74,17 +74,28 @@ export default function Hero() {
             {hero.subtitle}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-6">
-            <a href="#case-01" aria-label={hero.cta}>
+          <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5">
+            <a
+              href={hero.cta.primaryHref}
+              target="_blank"
+              rel="noopener"
+              aria-label={hero.cta.primary}
+            >
               <ShimmerButton className="group gap-3 text-sm font-medium">
-                {hero.cta}
+                {hero.cta.primary}
                 <span className="transition group-hover:translate-x-1">→</span>
               </ShimmerButton>
             </a>
-            <span className="mono-label hidden md:block !text-[0.6rem]">
-              {hero.microline}
-            </span>
+            <a
+              href={hero.cta.secondaryHref}
+              className="mono-label border border-offwhite/25 px-5 py-3 transition hover:border-gold hover:text-gold-bright"
+            >
+              {hero.cta.secondary} ↓
+            </a>
           </div>
+          <span className="mono-label mt-6 hidden md:block !text-[0.58rem] !text-offwhite/45">
+            {hero.microline}
+          </span>
         </motion.div>
       </div>
 
@@ -94,7 +105,6 @@ export default function Hero() {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
       >
-        <span className="mono-label !text-[0.55rem]">{hero.scrollHint}</span>
         <span className="text-gold">▼</span>
       </motion.div>
 
