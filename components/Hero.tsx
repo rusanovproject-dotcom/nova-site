@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { hero, nav } from "@/lib/content";
 import { AuroraText } from "@/components/ui/aurora-text";
@@ -11,23 +12,19 @@ export default function Hero() {
       id="hero"
       className="relative h-[100svh] w-full overflow-hidden grain vignette"
     >
-      {/* Кино-шоурил из 5 видео, full-bleed */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover grade"
-        poster="/poster/hero-reel.jpg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      >
-        <source src="/video/hero-reel.webm" type="video/webm" />
-        <source src="/video/hero-reel.mp4" type="video/mp4" />
-      </video>
+      {/* Затемнённый портрет Анастасии, full-bleed */}
+      <Image
+        src="/img/hero.webp"
+        alt="Анастасия Нехаева"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-top grade"
+      />
 
       {/* Затемнение под текст */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-coal via-coal/30 to-coal/40" />
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-coal/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-coal via-coal/55 to-coal/55" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-coal/85 via-coal/30 to-transparent" />
 
       {/* Тёплый золотой ореол снизу-слева — дышит под заголовком */}
       <div

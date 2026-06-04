@@ -35,26 +35,20 @@ function ActBreak() {
 
 /* ============ СЦЕНА 02 — УВЕРТЮРА ============ */
 export function Overture() {
-  const items = ["new-02", "new-06", "new-marble-product-still", "new-03"];
   return (
-    <section className="relative bg-coal px-6 py-20 md:px-12 md:py-28">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-        {items.map((src, i) => (
-          <Reveal key={src} delay={i * 0.12}>
-            <div className="relative aspect-[3/4] overflow-hidden rounded-sm grade">
-              <Image
-                src={img(src)}
-                alt="Кадр из портфолио NOVA"
-                fill
-                sizes="(max-width:768px) 50vw, 25vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
-              />
-            </div>
-          </Reveal>
-        ))}
-      </div>
-      <Reveal delay={0.3} className="mt-8 text-center">
-        <MonoLabel>{overture.caption}</MonoLabel>
+    <section className="relative flex min-h-[70svh] items-center justify-center bg-coal px-6 py-28 md:px-12 grain">
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[55%] w-[70%] -translate-x-1/2 -translate-y-1/2"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,162,75,0.10), transparent 72%)",
+        }}
+      />
+      <Reveal className="relative z-10 max-w-3xl text-center">
+        <MonoLabel className="!text-gold">ЧТО ТАКОЕ NOVA</MonoLabel>
+        <p className="mt-7 font-display text-2xl leading-snug text-offwhite md:text-4xl md:leading-[1.25]">
+          {overture.lead}
+        </p>
       </Reveal>
     </section>
   );
@@ -62,10 +56,16 @@ export function Overture() {
 
 /* ============ СЦЕНЫ 03–05 — КЛИЕНТСКИЕ КЕЙСЫ ============ */
 function CaseBlock({ data, index }: { data: (typeof cases)[number]; index: number }) {
-  const videoMap: Record<string, { mp4: string; poster: string; ratio: string }> = {
+  const videoMap: Record<string, { mp4: string; webm?: string; poster: string; ratio: string }> = {
     bracelet: { mp4: vid("bracelet"), poster: pos("bracelet"), ratio: "aspect-[9/16]" },
     marble: { mp4: vid("marble-1"), poster: pos("marble-1"), ratio: "aspect-[9/16]" },
     animation: { mp4: vid("animation"), poster: pos("animation"), ratio: "aspect-square" },
+    peonies: {
+      mp4: vid("botanical-peonies"),
+      webm: "/video/botanical-peonies.webm",
+      poster: pos("botanical-peonies"),
+      ratio: "aspect-[1080/1446]",
+    },
   };
   const v = videoMap[data.video];
   const flip = index % 2 === 1;
@@ -87,27 +87,13 @@ function CaseBlock({ data, index }: { data: (typeof cases)[number]; index: numbe
           <div className="relative mx-auto h-[64svh] max-h-[640px] overflow-hidden rounded-sm border border-gold/15 grade shadow-2xl shadow-black/50">
             <CinemaVideo
               mp4={v.mp4}
+              webm={v.webm}
               poster={v.poster}
               ratio={v.ratio}
               heightFit
               className="h-full"
             />
             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/5" />
-            {/* Magic UI BorderBeam — бегущий золотой блик по кромке кадра */}
-            <BorderBeam
-              size={130}
-              duration={9}
-              delay={index * 1.5}
-              borderWidth={1.5}
-            />
-            <BorderBeam
-              size={130}
-              duration={9}
-              delay={index * 1.5}
-              reverse
-              initialOffset={50}
-              borderWidth={1.5}
-            />
             <span className="mono-label absolute bottom-3 left-3 z-10 !text-[0.52rem] !text-offwhite/70">
               ● REC · {data.id}
             </span>
@@ -125,19 +111,6 @@ function CaseBlock({ data, index }: { data: (typeof cases)[number]; index: numbe
           <p className="mt-6 font-display text-lg italic text-gold-bright/90">
             {data.voice}
           </p>
-
-          {/* Режиссёрский разбор — BUILD-DECISIONS п.5 */}
-          <div className="mt-7 border-l border-gold/30 pl-5">
-            <MonoLabel className="!text-gold/70 !text-[0.6rem]">
-              ЗАМЫСЕЛ РЕЖИССЁРА
-            </MonoLabel>
-            <p className="mt-2 text-sm leading-relaxed text-offwhite/55">
-              {data.directorNote}
-            </p>
-          </div>
-
-          <p className="mono-label mt-7 !text-[0.6rem]">{data.facts}</p>
-          <p className="mono-label mt-2 !text-gold/50 !text-[0.58rem]">{data.note ?? ""}</p>
         </Reveal>
       </div>
     </section>
@@ -341,28 +314,17 @@ export function ColorDirection() {
           <p className="mono-label mt-3 text-center !text-[0.58rem]">
             ПОТЯНИ, ЧТОБЫ ПЕРЕКЛЮЧИТЬ СВЕТ
           </p>
+          {/* Балансирующий кадр справа */}
+          <div className="relative mt-4 aspect-[4/3] overflow-hidden rounded-sm border border-white/5 grade">
+            <Image
+              src={img(colorDirection.accent)}
+              alt="Кадр в обработке — NOVA"
+              fill
+              sizes="(max-width:768px) 100vw, 45vw"
+              className="object-cover"
+            />
+          </div>
         </Reveal>
-      </div>
-
-      {/* Контактный лист — film strip (приём Magic UI Marquee) */}
-      <div className="relative mt-20 overflow-hidden">
-        <MonoLabel className="mb-5 block !text-[0.6rem]">ДО / ПОСЛЕ · КАДРЫ В ОБРАБОТКЕ</MonoLabel>
-        <div className="flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {colorDirection.filmStrip.map((src) => (
-            <div
-              key={src}
-              className="relative aspect-[3/4] w-40 flex-none overflow-hidden rounded-sm border border-white/5 grade md:w-48"
-            >
-              <Image
-                src={img(src)}
-                alt="Обработка кадра — NOVA"
-                fill
-                sizes="200px"
-                className="object-cover transition-transform duration-700 hover:scale-110"
-              />
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
