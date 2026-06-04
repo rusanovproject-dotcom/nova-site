@@ -365,46 +365,29 @@ export function Manifesto() {
 
 /* ============ СЦЕНА 10 — ОБ АВТОРЕ (split parallax) ============ */
 export function About() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-
   return (
-    <section
-      ref={ref}
-      className="relative grid bg-coal-warm md:grid-cols-2"
-    >
-      <div className="flex items-center px-6 py-24 md:px-12 md:py-40">
-        <Reveal className="max-w-lg">
-          <MonoLabel className="!text-gold">{author.label}</MonoLabel>
-          <h2 className="mt-5 font-display text-5xl leading-[0.95] text-offwhite md:text-6xl">
-            {author.name[0]}
-            <br />
-            <span className="italic">{author.name[1]}</span>
-          </h2>
-          <p className="mt-8 text-offwhite/70 leading-relaxed">{author.body}</p>
-          <div className="mt-7 border-l border-gold/30 pl-5">
-            <p className="text-sm leading-relaxed text-offwhite/55">
-              {author.credential}
-            </p>
-          </div>
-        </Reveal>
-      </div>
-      <div className="relative min-h-[60svh] overflow-hidden md:min-h-full">
-        <motion.div style={{ y }} className="absolute inset-[-8%] grade">
-          <Image
-            src={img("hero")}
-            alt="Анастасия Нехаева — портрет"
-            fill
-            sizes="(max-width:768px) 100vw, 50vw"
-            className="object-cover object-top"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-coal-warm/50 via-transparent to-transparent" />
-      </div>
+    <section className="relative overflow-hidden bg-coal-warm px-6 py-28 md:px-12 md:py-40 grain">
+      {/* мягкое золотое свечение */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60%] w-[75%] -translate-x-1/2 -translate-y-1/2"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,162,75,0.10), transparent 72%)",
+        }}
+      />
+      <Reveal className="relative z-10 mx-auto max-w-3xl text-center">
+        <MonoLabel className="!text-gold">{author.label}</MonoLabel>
+        <h2 className="mt-6 font-display text-6xl leading-[0.95] text-offwhite md:text-8xl">
+          {author.name[0]} <span className="italic">{author.name[1]}</span>
+        </h2>
+        <p className="mx-auto mt-9 max-w-xl text-offwhite/70 leading-relaxed">
+          {author.body}
+        </p>
+        <div className="hairline mx-auto my-8 w-32" />
+        <p className="mx-auto max-w-2xl font-display text-lg italic leading-relaxed text-gold-bright/85 md:text-xl">
+          {author.credential}
+        </p>
+      </Reveal>
     </section>
   );
 }
