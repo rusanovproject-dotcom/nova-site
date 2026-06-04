@@ -1,26 +1,234 @@
 @import "tailwindcss";
 
+/* ============ NOVA — Director's Cut / Editorial Noir ============ */
+/* Палитра из её кадров: уголь + тёплое золото + иридесцент. НЕ розовый. */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --coal: #0a0a0b;
+  --coal-warm: #15130f;
+  --ink: #1c1a16;
+  --offwhite: #f2ede4;
+  --muted: #a59f93;
+  --gold: #c9a24b;
+  --gold-bright: #e8c77a;
+  --terracotta: #b5582e;
+  --steel: #5c6b82;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-coal: var(--coal);
+  --color-coal-warm: var(--coal-warm);
+  --color-ink: var(--ink);
+  --color-offwhite: var(--offwhite);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-terracotta: var(--terracotta);
+  --color-steel: var(--steel);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-mono-jb);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--coal);
+  color: var(--offwhite);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--coal);
+  color: var(--offwhite);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--coal);
+}
+
+/* Typo helpers */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.mono-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Тонкая золотая линия-волосок */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold) 20%,
+    var(--gold-bright) 50%,
+    var(--gold) 80%,
+    transparent
+  );
+  opacity: 0.5;
+}
+
+/* Film grain overlay */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 5;
+}
+
+/* Vignette */
+.vignette::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 3;
+}
+
+/* Золотой колор-грейд — сшивает разнородные кадры в одну фильмографию */
+.grade {
+  filter: saturate(0.92) contrast(1.04) brightness(0.98);
+}
+
+/* ============ Magic UI анимации (BorderBeam/ShimmerButton/ShineBorder/AuroraText) ============ */
+@keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+  }
+}
+@keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+  }
+  15%,
+  35% {
+    transform: translateZ(0) rotate(90deg);
+  }
+  65%,
+  85% {
+    transform: translateZ(0) rotate(270deg);
+  }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+@keyframes aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-shimmer-slide {
+  animation: shimmer-slide var(--speed) ease-in-out infinite alternate;
+}
+.animate-spin-around {
+  animation: spin-around calc(var(--speed) * 2) infinite linear;
+}
+.animate-shine {
+  animation: shine var(--duration) infinite linear;
+}
+.animate-aurora {
+  animation: aurora 10s ease-in-out infinite alternate;
+}
+
+/* Тёплый золотой "studio glow" — мягкое свечение позади ключевых блоков */
+.gold-glow {
+  position: relative;
+}
+.gold-glow::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 40%,
+    rgba(201, 162, 75, 0.18),
+    transparent 70%
+  );
+}
+
+/* Дыхание золотого ореола под hero-заголовком */
+@keyframes gold-breath {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+  }
+}
+.animate-gold-breath {
+  animation: gold-breath 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lenis.lenis-smooth {
+    scroll-behavior: smooth !important;
+  }
+  .animate-shimmer-slide,
+  .animate-spin-around,
+  .animate-shine,
+  .animate-aurora,
+  .animate-gold-breath {
+    animation: none !important;
+  }
 }

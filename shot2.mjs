@@ -1,0 +1,20 @@
+import { chromium } from "playwright";
+const URL = "http://localhost:3210";
+const OUT = "/tmp/nova-shots";
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
+const page = await ctx.newPage();
+await page.goto(URL, { waitUntil: "networkidle" });
+await page.waitForTimeout(2000);
+// jump to case 01 anchor
+await page.evaluate(() => document.querySelector("#case-01")?.scrollIntoView());
+await page.waitForTimeout(1600);
+await page.screenshot({ path: `${OUT}/fix-case01.png` });
+await page.evaluate(() => document.querySelector("#case-02")?.scrollIntoView());
+await page.waitForTimeout(1600);
+await page.screenshot({ path: `${OUT}/fix-case02.png` });
+await page.evaluate(() => document.querySelector("#case-03")?.scrollIntoView());
+await page.waitForTimeout(1600);
+await page.screenshot({ path: `${OUT}/fix-case03.png` });
+await browser.close();
+console.log("ok");
