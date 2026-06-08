@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NOVA — сайт агентства
 
-## Getting Started
+Лендинг агентства **NOVA** (Анастасия Нехаева, AI-режиссура рекламных кампаний).
+Сделано на [Next.js](https://nextjs.org) + Tailwind. Этот репозиторий — рабочая версия сайта, которую можно скачать и продолжать редактировать.
 
-First, run the development server:
+---
 
+## Как скачать
+
+**Вариант 1 — кнопкой (проще):** вверху страницы репозитория нажми зелёную кнопку **Code → Download ZIP**, распакуй архив.
+
+**Вариант 2 — через git:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/rusanovproject-dotcom/nova-site.git
+cd nova-site
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Как запустить у себя на компьютере
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Нужен установленный [Node.js](https://nodejs.org) (LTS-версия). Дальше в папке проекта:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install        # один раз — поставит зависимости
+npm run dev        # запустит сайт локально
+```
 
-## Learn More
+Открой в браузере **http://localhost:3000** — увидишь сайт. Он сам обновляется, когда правишь файлы.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Где что менять
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Что хочешь изменить | Где |
+|---|---|
+| **Все тексты сайта** (заголовки, описания, кнопки, контакты) | `lib/content.ts` — всё разложено по блокам с комментариями |
+| **Картинки** | папка `public/img/` (формат `.webp`) — замени файл с тем же именем |
+| **Видео** | папка `public/video/` |
+| **Telegram / ссылка CTA** | в начале `lib/content.ts` → блок `nav` |
+| **Внешний вид, цвета, отступы** | компоненты в папке `components/` + `app/globals.css` |
 
-## Deploy on Vercel
+Самое частое — правка текстов. Открываешь `lib/content.ts`, меняешь текст в кавычках, сохраняешь — сайт сразу обновляется в браузере.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Как выложить в интернет
+
+Проще всего через [Vercel](https://vercel.com) (бесплатно для таких сайтов):
+1. Зарегистрируйся на vercel.com через свой GitHub.
+2. Нажми **Add New → Project**, выбери этот репозиторий.
+3. Vercel сам всё соберёт и даст ссылку вида `nova-xxx.vercel.app`.
+
+После этого любое изменение, отправленное в репозиторий (`git push`), будет автоматически появляться на сайте.
+
+---
+
+## Структура проекта
+
+```
+app/            — каркас страницы (layout, page, стили)
+components/     — блоки сайта (Hero, Scenes, Compare, видео и т.д.)
+lib/content.ts  — ВСЕ ТЕКСТЫ сайта
+public/img/     — картинки
+public/video/   — видео
+```
+
+Вопросы по проекту — к Никите.
